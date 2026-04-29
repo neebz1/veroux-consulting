@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VÉROUX Consulting & Estates — AI Automation for Your Business</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E0C878;
+            --gold-dark: #A88A2E;
+            --bg: #0A0A0A;
+            --bg-card: #141414;
+            --bg-card-hover: #1A1A1A;
+            --text: #F5F5F5;
+            --text-muted: #888;
+            --border: #222;
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: #0A0A0A !important;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600 !important;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light) !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 72px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.08;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: var(--gold);
+            color: #0A0A0A;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 60px;
+        }
+
+        .hero-stat h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .hero-stat p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Section Headers */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            border-color: rgba(201, 168, 76, 0.3);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+
+        .service-card.featured {
+            border-color: var(--gold);
+            position: relative;
+        }
+
+        .service-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #0A0A0A;
+            padding: 4px 20px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .service-tier {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .service-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .service-price {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .service-price strong {
+            color: var(--text);
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 32px;
+            flex: 1;
+        }
+
+        .service-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .service-card .btn-primary {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .step h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Industries */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .industry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .industry-card:hover {
+            border-color: rgba(201, 168, 76, 0.3);
+        }
+
+        .industry-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .industry-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .industry-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .contact-detail .icon {
+            font-size: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            padding: 14px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form select option {
+            background: var(--bg);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand .logo {
+            font-size: 20px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 14px;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--text);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .steps { grid-template-columns: repeat(2, 1fr); }
+            .industries-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 17px; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .hero-stat h3 { font-size: 24px; }
+
+            .services-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .industries-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+
+            .section-title { font-size: 28px; }
+            section { padding: 60px 0; }
+
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero h1 { font-size: 28px; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">VÉROUX<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#industries">Industries</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-cta">Book a Free Audit</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge">Saskatoon's AI Automation Partner</div>
+            <h1>Your Business Never<br><span>Misses Another Lead</span></h1>
+            <p>Stop losing revenue to missed calls. Our AI systems capture, qualify, and book every lead — 24/7, without hiring a single employee.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">Book a Free Audit →</a>
+                <a href="#services" class="btn-secondary">View Services</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <h3>3-5x</h3>
+                    <p>More Leads Captured</p>
+                </div>
+                <div class="hero-stat">
+                    <h3>60 sec</h3>
+                    <p>Average Response Time</p>
+                </div>
+                <div class="hero-stat">
+                    <h3>$500+</h3>
+                    <p>Saved Per Missed Call</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-label">Our Services</div>
+            <h2 class="section-title">Choose Your Growth Plan</h2>
+            <p class="section-subtitle">Three tiers of AI-powered lead capture. Start with the Safety Net, upgrade as your revenue grows.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-tier">Tier 1</div>
+                    <h3 class="service-name">Safety Net</h3>
+                    <div class="service-price"><strong>$97</strong> /month <br><span style="font-size:13px;">+ $297 setup</span></div>
+                    <ul class="service-features">
+                        <li>Missed call auto text-back within 60s</li>
+                        <li>Custom SMS greeting with your brand</li>
+                        <li>Lead capture & contact logging</li>
+                        <li>Real-time phone alerts</li>
+                        <li>Monthly performance report</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Get Started</a>
+                </div>
+
+                <div class="service-card featured">
+                    <div class="service-tier">Tier 2</div>
+                    <h3 class="service-name">Gatekeeper</h3>
+                    <div class="service-price"><strong>$497</strong> /month <br><span style="font-size:13px;">+ $997 setup</span></div>
+                    <ul class="service-features">
+                        <li>Everything in Safety Net</li>
+                        <li>AI qualification bot asks 3 screening questions</li>
+                        <li>Automatic appointment booking</li>
+                        <li>Smart lead scoring (hot/warm/cold)</li>
+                        <li>CRM integration (HubSpot, GHL, Clio)</li>
+                        <li>Weekly lead analytics dashboard</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Get Started</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-tier">Tier 3</div>
+                    <h3 class="service-name">The Vault</h3>
+                    <div class="service-price"><strong>$1,497</strong> /month <br><span style="font-size:13px;">+ $2,497 setup</span></div>
+                    <ul class="service-features">
+                        <li>Everything in Gatekeeper</li>
+                        <li>Human-in-the-loop quality control</li>
+                        <li>Full CRM sync & automation</li>
+                        <li>Advanced lead analytics & attribution</li>
+                        <li>Competitor monitoring alerts</li>
+                        <li>Dedicated account manager</li>
+                        <li>Priority 24/7 support</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">From Missed Call to Closed Deal</h2>
+            <p class="section-subtitle">Our system works while you work. We capture, qualify, and deliver your next client — automatically.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Call Comes In</h3>
+                    <p>Client calls your business. If you miss it, our system catches it instantly — no voicemail required.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Instant Text Reply</h3>
+                    <p>Within 60 seconds, your prospect gets a personalized SMS with your brand, acknowledging their call.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>AI Qualification</h3>
+                    <p>Our AI asks smart questions to determine budget, urgency, and fit — so you only talk to hot leads.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>You Get Notified</h3>
+                    <p>Qualified leads ping your phone instantly with context. You call back with full knowledge of the client's needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="industries">
+        <div class="container">
+            <div class="section-label">Who We Serve</div>
+            <h2 class="section-title">Built for High-Value Industries</h2>
+            <p class="section-subtitle">Every missed call costs you real money. We protect the industries where a single lead is worth thousands.</p>
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <div class="industry-icon">⚖️</div>
+                    <h3>Law Firms</h3>
+                    <p>$500+ lost per missed intake call. Our system captures case inquiries 24/7.</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🔧</div>
+                    <h3>Contractors</h3>
+                    <p>$5,000+ per job estimate. Never lose a roof, renovation, or repair quote again.</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🏠</div>
+                    <h3>Real Estate</h3>
+                    <p>$3,500+ commission per lead. Capture buyer inquiries and listing appointments around the clock.</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🏥</div>
+                    <h3>Healthcare</h3>
+                    <p>$200+ per new patient visit. Automate appointment bookings and insurance verification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="section-label">Get Started</div>
+            <h2 class="section-title">Book Your Free Audit</h2>
+            <p class="section-subtitle">We'll analyze your current intake process and show you exactly how much revenue you're leaving on the table. No commitment, no pressure.</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Let's talk.</h3>
+                    <p>Every business in Saskatoon is losing money to missed calls. Let's fix yours in 15 minutes.</p>
+                    <div class="contact-detail">
+                        <span class="icon">📞</span>
+                        <span>(306) 555-0199</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="icon">✉️</span>
+                        <span>hello@verouxconsulting.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="icon">📍</span>
+                        <span>Saskatoon, Saskatchewan</span>
+                    </div>
+                    <p style="margin-top:24px;font-size:14px;color:var(--text-muted);">
+                        <strong>Free Audit includes:</strong> Missed call analysis, competitor review, and a custom 3-step automation plan tailored to your business.
+                    </p>
+                </div>
+                <form class="contact-form" onsubmit="handleForm(event)">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="tel" placeholder="Phone Number">
+                    <select required>
+                        <option value="">Select Your Industry</option>
+                        <option>Law Firm</option>
+                        <option>Contractor / Trades</option>
+                        <option>Real Estate</option>
+                        <option>Healthcare</option>
+                        <option>Other</option>
+                    </select>
+                    <textarea placeholder="Tell us about your business and what you're looking for..." required></textarea>
+                    <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Book My Free Audit →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">VÉROUX<span>.</span></a>
+                    <p>Strategic consulting and AI infrastructure for businesses that refuse to leave money on the table. Saskatoon-owned, globally capable.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <a href="#services">Safety Net</a>
+                    <a href="#services">Gatekeeper</a>
+                    <a href="#services">The Vault</a>
+                    <a href="#services">Free Audit</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Book a Call</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Veroux Consulting Ltd. All rights reserved.</span>
+                <span>Built in Saskatoon, SK 🇨🇦</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const links = document.querySelector('.nav-links');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function handleForm(e) {
+            e.preventDefault();
+            alert('Thanks! We\'ll reach out within 2 hours to schedule your free audit. — Team VÉROUX');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
